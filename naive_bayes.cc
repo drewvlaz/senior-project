@@ -48,16 +48,6 @@ public:
         m_training_data.push_back({label, phrases});
     }
 
-    bool VocabContains(std::string word) {
-        // std::find returns an iterator to element if found, 
-        // else returns end of the vector in O(n) time
-        return std::find(
-            m_vocabulary.begin(),
-            m_vocabulary.end(),
-            word
-        ) != m_vocabulary.end();
-    }
-
     void PrepareData() {
         for(Category &category : m_training_data) {
             for(const std::vector<std::string> &phrase : category.phrases) {
@@ -103,31 +93,7 @@ public:
             }
             m_category_probabilities[i] *= m_training_data.at(i).phrases.size();
         }
-        return m_training_data.at(max(m_category_probabilities)).label;
-    }
-
-    std::vector<std::string> Split(std::string sentence) {
-        std::string buffer;                 // buffer string
-        std::stringstream stream(sentence);     // insert string into a stream
-        std::vector<std::string> tokens;    // vector to hold our words
-        while (stream >> buffer){
-            tokens.push_back(buffer);
-        }
-        return tokens;
-    }
-
-    int max(std::vector<double> values) {
-        double max {values.at(0)};
-        double num;
-        int highest_index = 0;
-        for(int i=0; i<values.size(); ++i) {
-            num = values.at(i);
-            if(num > max) {
-                highest_index = i;
-                max = num;
-            }
-        }
-        return highest_index;
+        return m_training_data.at(Max(m_category_probabilities)).label;
     }
     
     void DisplayCategoryPercentages() {
@@ -140,6 +106,40 @@ public:
             double percentage = m_category_probabilities.at(i) / sum * 100;
             std::cout << m_training_data.at(i).label << " " << percentage << "\n";
         }
+    }
+
+    bool VocabContains(std::string word) {
+        // std::find returns an iterator to element if found, 
+        // else returns end of the vector in O(n) time
+        return std::find(
+            m_vocabulary.begin(),
+            m_vocabulary.end(),
+            word
+        ) != m_vocabulary.end();
+    }
+
+    std::vector<std::string> Split(std::string sentence) {
+        std::string buffer;                 // buffer string
+        std::stringstream stream(sentence);     // insert string into a stream
+        std::vector<std::string> tokens;    // vector to hold our words
+        while (stream >> buffer){
+            tokens.push_back(buffer);
+        }
+        return tokens;
+    }
+
+    int Max(std::vector<double> values) {
+        double max {values.at(0)};
+        double num;
+        int index;
+        for(int i=0; i<values.size(); ++i) {
+            num = values.at(i);
+            if(num > max) {
+                max = num;
+                index = i;
+            }
+        }
+        return index;
     }
 };
 
