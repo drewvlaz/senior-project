@@ -26,15 +26,15 @@
 class MultinomialNB {
 private:
     struct Category {
-        std::string label;
-        std::vector<std::vector<std::string> > phrases;     // list of phrases containing a list of words
+        std::string label;                                  // identifies category
+        std::vector<std::vector<std::string> > phrases;     // vector of phrases containing a list of words
         std::map<std::string, double> probabilities;        // map of word to probability given the category
         std::map<std::string, int> bag_of_words;            // map of word to number of apperances in data
-        int total_word_count;
+        int total_word_count;                               // total word count of training data
     };
     std::vector<Category> m_training_data;                  // contains category labels and examples for training
-    std::vector<std::string> m_vocabulary;                  // list of unique words across all categories
-    std::vector<double> m_category_probabilities;
+    std::vector<std::string> m_vocabulary;                  // vector of unique words across all categories
+    std::vector<double> m_category_probabilities;           // probability input is of each category
 
 public:
     MultinomialNB() {
@@ -182,6 +182,24 @@ int main() {
             {"i", "want", "to", "hear", "a", "joke"},
         }
     );
+    classifier.AddTrainingSet(
+        "greeting", {
+            {"hello", "how", "are", "you"},
+            {"hello"},
+            {"nice", "to", "meet", "you"},
+            {"hey", "how", "is", "it", "going"},
+            {"hows", "it", "going"},
+            {"whats", "up"},
+            {"hello", "its", "nice", "to", "meet", "you"},
+            {"hey"},
+            {"hello", "my", "name", "is"},
+            {"hey", "im"},
+            {"hello", "i", "am"},
+        }
+    );
+
+
+
 
     classifier.PrepareData();
     classifier.CalculateWordProbabilities();
@@ -191,7 +209,7 @@ int main() {
     // std::cout << classifier.GetTrainingData()->at(0).probabilities["week"] << "\n";
     // std::cout << classifier.GetTrainingData()->at(1).probabilities["grades"] << "\n";
 
-    std::string sentence = "what is the weather like for today";
+    std::string sentence = "hello my name is drew";
     std::string prediction = classifier.MakePrediction(sentence);
     std::cout << prediction << "\n";
     classifier.DisplayCategoryPercentages();
