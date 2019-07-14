@@ -1,27 +1,29 @@
 #include <iostream>
-#include <map>          // For std::map
-#include <vector>       // For std::vector
+#include <algorithm>    // std::find
+#include <map>          // std::map
+#include <vector>       // std::vector
+#include <sstream>
 
-struct Category {
-    std::string title;
-    std::vector<std::vector<std::string>> phrases;
-};
+std::vector<std::string> SplitString(std::string sentence) {
+    std::string buffer;                 // Have a buffer string
+    std::stringstream ss(sentence);       // Insert the string into a stream
+    std::vector<std::string> tokens; // Create vector to hold our words
+
+    while (ss >> buffer)
+        tokens.push_back(buffer);
+
+    return tokens;
+}
+
+std::string ToLowerCase(std::string sentence) {
+    
+}
 
 int main() {
 
-    std::vector<Category> m_training_data;
-    m_training_data.resize(10);
+    std::vector<std::string> split = SplitString("Hello world");
 
-    m_training_data[0].title = "greetings";
-    m_training_data[0].phrases = {{ "hello" }, { "how are you" }};
-
-    m_training_data[1] = {"weather", {{ "rainny" }, {"what", "is", "the", "weather", "like", "for", "the", "week"}}};
-
-    for(std::string word : m_training_data[1].phrases[1]) {
-        std::cout << word << "\n";
-    }
-
-    std::cout << m_training_data[1].phrases[1].size() << "\n\n";
+    std::cout << split[0] << "\n";
 
     return 0;
 }
