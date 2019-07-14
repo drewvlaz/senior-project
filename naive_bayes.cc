@@ -30,15 +30,14 @@ private:
         std::vector<std::vector<std::string> > phrases;     // vector of phrases containing a list of words
         std::map<std::string, double> probabilities;        // map of word to probability given the category
         std::map<std::string, int> bag_of_words;            // map of word to number of apperances in data
-        int total_word_count;                               // total word count of training data
+        int total_word_count;                               // total word count from all phrases
     };
     std::vector<Category> m_training_data;                  // contains category labels and examples for training
     std::vector<std::string> m_vocabulary;                  // vector of unique words across all categories
     std::vector<double> m_category_probabilities;           // probability input is of each category
 
 public:
-    MultinomialNB() {
-    }
+    MultinomialNB() {}
 
     auto GetTrainingData() { return &m_training_data; }
     auto GetVocabulary() { return m_vocabulary; }
@@ -68,7 +67,7 @@ public:
                 for(const std::string &word : phrase) {
                     category.probabilities[word] = {
                         // calculate probability of a word given a category
-                        // add 1 to numerator and vocab size to denominator for laplace smoothing
+                        // add 1 to numerator and add vocab size to denominator for laplace smoothing
                         static_cast<double>(category.bag_of_words[word] + 1)
                         / (category.total_word_count + m_vocabulary.size())
                     };
@@ -78,19 +77,25 @@ public:
     }
 
     std::string MakePrediction(std::string sentence) {
-        std::vector<std::string> split_string = Split(sentence);
+        std::vector<std::string> split_string {Split(sentence)};
         m_category_probabilities.resize(m_training_data.size());
 
         for(int i=0; i<m_training_data.size(); ++i) {
+            // vectors initialize to 0, since multiplying, set it to 1
             m_category_probabilities.at(i) = 1;
             for(const std::string &word: split_string) {
+                // check to see if training data of a category contains the target word
                 if(m_training_data.at(i).bag_of_words[word]) {
+                    // P(c|X)  *=  P(x1|c)P(x2|c)...P(xn|c)
+                    // multiply probability of the target word given the category
                     m_category_probabilities.at(i) *= m_training_data.at(i).probabilities[word];
                 }
                 else {
                     m_category_probabilities.at(i) *= static_cast<double>(1) / m_vocabulary.size();
                 }
             }
+            // P(c|X) *= P(c)
+            // ignoring denominator because it will be the same for all categories
             m_category_probabilities[i] *= m_training_data.at(i).phrases.size();
         }
         return m_training_data.at(Max(m_category_probabilities)).label;
@@ -119,9 +124,9 @@ public:
     }
 
     std::vector<std::string> Split(std::string sentence) {
-        std::string buffer;                 // buffer string
-        std::stringstream stream(sentence);     // insert string into a stream
-        std::vector<std::string> tokens;    // vector to hold our words
+        std::string buffer;                     // buffer string
+        std::stringstream stream {sentence};    // insert string into a stream
+        std::vector<std::string> tokens;        // vector to hold our words
         while (stream >> buffer){
             tokens.push_back(buffer);
         }
