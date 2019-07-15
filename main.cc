@@ -64,15 +64,17 @@ int main() {
             "hey google what is",
             "i want to search the internet",
             "look up online",
+            "google online definition internet information",
         }
     );
 
     classifier.PrepareData();
     classifier.CalculateWordProbabilities();
 
-    std::string sentence = "how is the";
+    std::string sentence = "how is the weather";
     std::string prediction = classifier.MakePrediction(sentence);
-    std::cout << prediction << "\n";
+    std::cout << sentence << " -> ";
+    std::cout << prediction << "\n\n";
     classifier.DisplayCategoryPercentages();
 
     return 0;
