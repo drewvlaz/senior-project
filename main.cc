@@ -56,29 +56,13 @@ int main() {
         }
     );
 
-
-
-
     classifier.PrepareData();
     classifier.CalculateWordProbabilities();
-
-    // std::cout << classifier.GetTrainingData()->at(0).word_count << "\n";
-    // std::cout << classifier.GetTrainingData()->at(1).individual_word_counts["grades"] << "\n";
-    // std::cout << classifier.GetTrainingData()->at(0).probabilities["week"] << "\n";
-    // std::cout << classifier.GetTrainingData()->at(1).probabilities["grades"] << "\n";
 
     std::string sentence = "how are my grades looking today";
     std::string prediction = classifier.MakePrediction(sentence);
     std::cout << prediction << "\n";
     classifier.DisplayCategoryPercentages();
-
-
-    // for(std::string word : classifier.GetVocabulary()) {
-    //     std::cout << word << "\n";
-    // }
-
-    // std::cout << classifier.GetVocabulary().size() << "\n";
-    // std::cout << classifier.GetTrainingData()->at(0).phrases[0][0] << "\n";
 
     return 0;
 }
