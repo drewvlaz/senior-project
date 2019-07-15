@@ -25,7 +25,7 @@ void MultinomialNB::AddTrainingData(std::string label, std::vector<std::vector<s
 
 void MultinomialNB::AddTrainingData(std::string label, std::vector<std::string> whole_sentences) {
     std::vector<std::vector<std::string>> split_sentences;
-    for(const std::string &sentence : whole_sentences) {
+    for(std::string sentence : whole_sentences) {
         split_sentences.push_back(Split(sentence));
     }
     m_training_data.push_back({label, split_sentences});
@@ -81,7 +81,7 @@ std::string MultinomialNB::MakePrediction(std::string sentence) {
         }
         // P(c|X) *= P(c)
         // P(c) is the num of phrases in category / total num of phrases
-        m_category_probabilities[i] *= m_training_data.at(i).phrases.size() / static_cast<double>(m_phrase_count);
+        m_category_probabilities.at(i) *= m_training_data.at(i).phrases.size() / static_cast<double>(m_phrase_count);
     }
     return m_training_data.at(Max(m_category_probabilities)).label;
 }
@@ -121,7 +121,7 @@ std::vector<std::string> MultinomialNB::Split(std::string sentence) {
 int MultinomialNB::Max(std::vector<double> values) {
     double max {values.at(0)};
     double num;
-    int index;
+    int index = 0;
     for(int i=0; i<values.size(); ++i) {
         num = values.at(i);
         if(num > max) {

@@ -55,11 +55,22 @@ int main() {
             {"hello", "i", "am"},
         }
     );
+    classifier.AddTrainingData(
+        "search", {
+            "can you look up",
+            "google this please",
+            "what is the definition of",
+            "look up this for me",
+            "hey google what is",
+            "i want to search the internet",
+            "look up online",
+        }
+    );
 
     classifier.PrepareData();
     classifier.CalculateWordProbabilities();
 
-    std::string sentence = "how are my grades looking today";
+    std::string sentence = "how is the";
     std::string prediction = classifier.MakePrediction(sentence);
     std::cout << prediction << "\n";
     classifier.DisplayCategoryPercentages();
