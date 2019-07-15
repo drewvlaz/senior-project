@@ -4,7 +4,7 @@
 int main() {
     MultinomialNB classifier;
 
-    classifier.AddTrainingSet(
+    classifier.AddTrainingData(
         "weather", {
             {"how", "is", "the", "weather"},
             {"is", "it", "rainy", "outside"},
@@ -19,7 +19,7 @@ int main() {
             {"cloudy", "inside", "today", "tomorrow", "week", "day"},
         }
     );
-    classifier.AddTrainingSet( 
+    classifier.AddTrainingData( 
         "grades", {
             {"what", "are", "my", "grades", "like"},
             {"how", "did", "i", "do", "on", "that", "test"},
@@ -31,7 +31,7 @@ int main() {
             {"math", "english", "science", "subject", "subjects"},
         }
     );
-    classifier.AddTrainingSet(
+    classifier.AddTrainingData(
         "jokes", {
             {"can", "you", "tell", "me", "a", "joke"},
             {"give", "me", "something", "funny"},
@@ -40,7 +40,7 @@ int main() {
             {"i", "want", "to", "hear", "a", "joke"},
         }
     );
-    classifier.AddTrainingSet(
+    classifier.AddTrainingData(
         "greeting", {
             {"hello", "how", "are", "you"},
             {"hello"},

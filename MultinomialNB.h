@@ -1,3 +1,4 @@
+
 // This program is a multinomial Naive Bayes classifier for 
 // for text classification
 // 
@@ -47,7 +48,8 @@ public:
     auto GetVocabulary() { return m_vocabulary; }
     auto GetCategoryProbabilities() { return m_category_probabilities; }
 
-    void AddTrainingSet(std::string label, std::vector<std::vector<std::string> > phrases);
+    void AddTrainingData(std::string label, std::vector<std::vector<std::string>> split_sentences);
+    void AddTrainingData(std::string label, std::vector<std::string> whole_sentences);
     void PrepareData();
     void CalculateWordProbabilities();
     std::string MakePrediction(std::string sentence);

@@ -19,8 +19,16 @@
 
 #include "MultinomialNB.h"
 
-void MultinomialNB::AddTrainingSet(std::string label, std::vector<std::vector<std::string> > phrases) {
-    m_training_data.push_back({label, phrases});
+void MultinomialNB::AddTrainingData(std::string label, std::vector<std::vector<std::string>> split_sentences) {
+    m_training_data.push_back({label, split_sentences});
+}
+
+void MultinomialNB::AddTrainingData(std::string label, std::vector<std::string> whole_sentences) {
+    std::vector<std::vector<std::string>> split_sentences;
+    for(const std::string &sentence : whole_sentences) {
+        split_sentences.push_back(Split(sentence));
+    }
+    m_training_data.push_back({label, split_sentences});
 }
 
 void MultinomialNB::PrepareData() {
