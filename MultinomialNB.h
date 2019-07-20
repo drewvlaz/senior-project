@@ -51,7 +51,7 @@ public:
     void AddTrainingData(std::string label, std::vector<std::vector<std::string>> split_sentences);
     void AddTrainingData(std::string label, std::vector<std::string> whole_sentences);
     void PrepareData();
-    void CalculateWordProbabilities();
+    void Train();
     std::string MakePrediction(std::string sentence);
     void DisplayCategoryPercentages();
     bool VocabContains(std::string word);

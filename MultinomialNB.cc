@@ -46,7 +46,7 @@ void MultinomialNB::PrepareData() {
     }
 }
 
-void MultinomialNB::CalculateWordProbabilities() {
+void MultinomialNB::Train() {
     for(Category &category : m_training_data) {
         for(const std::vector<std::string> &phrase : category.phrases) {
             for(const std::string &word : phrase) {

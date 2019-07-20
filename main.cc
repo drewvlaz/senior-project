@@ -2,9 +2,9 @@
 #include "MultinomialNB.h"
 
 int main() {
-    MultinomialNB classifier;
+    MultinomialNB model;
 
-    classifier.AddTrainingData(
+    model.AddTrainingData(
         "weather", {
             {"how", "is", "the", "weather"},
             {"is", "it", "rainy", "outside"},
@@ -19,7 +19,7 @@ int main() {
             {"cloudy", "inside", "today", "tomorrow", "week", "day"},
         }
     );
-    classifier.AddTrainingData( 
+    model.AddTrainingData( 
         "grades", {
             {"what", "are", "my", "grades", "like"},
             {"how", "did", "i", "do", "on", "that", "test"},
@@ -31,7 +31,7 @@ int main() {
             {"math", "english", "science", "subject", "subjects"},
         }
     );
-    classifier.AddTrainingData(
+    model.AddTrainingData(
         "jokes", {
             {"can", "you", "tell", "me", "a", "joke"},
             {"give", "me", "something", "funny"},
@@ -40,7 +40,7 @@ int main() {
             {"i", "want", "to", "hear", "a", "joke"},
         }
     );
-    classifier.AddTrainingData(
+    model.AddTrainingData(
         "greeting", {
             {"hello", "how", "are", "you"},
             {"hello"},
@@ -55,7 +55,7 @@ int main() {
             {"hello", "i", "am"},
         }
     );
-    classifier.AddTrainingData(
+    model.AddTrainingData(
         "search", {
             "can you look up",
             "google this please",
@@ -68,14 +68,14 @@ int main() {
         }
     );
 
-    classifier.PrepareData();
-    classifier.CalculateWordProbabilities();
+    model.PrepareData();
+    model.Train();
 
-    std::string sentence = "how is the weather";
-    std::string prediction = classifier.MakePrediction(sentence);
+    std::string sentence = "how is the weather today";
+    std::string prediction = model.MakePrediction(sentence);
     std::cout << sentence << " -> ";
     std::cout << prediction << "\n\n";
-    classifier.DisplayCategoryPercentages();
+    model.DisplayCategoryPercentages();
 
     return 0;
 }
