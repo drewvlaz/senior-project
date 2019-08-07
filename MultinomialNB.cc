@@ -142,7 +142,7 @@ std::vector<std::string> MultinomialNB::Split(std::string sentence) {
 int MultinomialNB::Max(std::vector<double> values) {
     double max {values.at(0)};
     double num;
-    int index = 0;
+    int index {0};
     for(int i=0; i<values.size(); ++i) {
         num = values.at(i);
         if(num > max) {
