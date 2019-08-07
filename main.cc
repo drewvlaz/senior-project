@@ -8,8 +8,8 @@ int main() {
     model.PrepareData();
     model.Train();
 
-    std::string sentence = "how is the weather today, i hope it is good";
-    std::string prediction = model.MakePrediction(sentence);
+    std::string sentence = "hey hows it going, my name is drew";
+    std::string prediction = model.Classify(sentence);
     std::cout << sentence << " -> ";
     std::cout << prediction << "\n\n";
     model.DisplayCategoryPercentages();

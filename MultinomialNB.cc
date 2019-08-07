@@ -76,7 +76,7 @@ void MultinomialNB::Train() {
     }
 }
 
-std::string MultinomialNB::MakePrediction(std::string sentence) {
+std::string MultinomialNB::Classify(std::string sentence) {
     std::vector<std::string> split_string {Split(sentence)};
     m_category_probabilities.resize(m_training_data.size());
 

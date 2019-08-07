@@ -55,7 +55,7 @@ public:
     void ReadInTrainingData();  // Default file name: data.json
     void PrepareData();
     void Train();
-    std::string MakePrediction(std::string sentence);
+    std::string Classify(std::string sentence);
     void DisplayCategoryPercentages();
     bool VocabContains(std::string word);
     std::vector<std::string> Split(std::string sentence);

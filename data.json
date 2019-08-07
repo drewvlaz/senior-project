@@ -16,7 +16,8 @@
         "what is the weather like for the week",
         "how cloudy is it",
         "should i stay inside today",
-        "wehn will it stop raining",
+        "is it thundering and lightening",
+        "when will it stop raining",
         "weather outside sunny rainy",
         "can you tell me the weather",
         "raining weather hot cold temperature",
@@ -37,7 +38,8 @@
         "give me something funny",
         "i want to hear a joke",
         "lighten the mood for me",
-        "tell me something funny"
+        "tell me something funny",
+        "i am bored can i hear a joke"
     ],
     "greeting" : [
         "hello how are you",
