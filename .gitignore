@@ -1,7 +1,6 @@
 .vscode/tasks.json
 .vscode/launch.json
 *.o
-algorithms/calculating_primes
 weather
 main
 test.json
