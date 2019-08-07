@@ -26,6 +26,8 @@
 #include <map>          // std::map
 #include <vector>       // std::vector
 #include <sstream>      // std::stringstream
+#include <fstream>      // std::fstream
+#include <json/json.h>  // json objects
 
 class MultinomialNB {
 private:
@@ -48,8 +50,9 @@ public:
     auto GetVocabulary() { return m_vocabulary; }
     auto GetCategoryProbabilities() { return m_category_probabilities; }
 
-    void AddTrainingData(std::string label, std::vector<std::vector<std::string>> split_sentences);
-    void AddTrainingData(std::string label, std::vector<std::string> whole_sentences);
+    void AddTrainingData(std::string label, std::vector<std::string> sentences);
+    void ReadInTrainingData(std::string file_name);
+    void ReadInTrainingData();  // Default file name: data.json
     void PrepareData();
     void Train();
     std::string MakePrediction(std::string sentence);
