@@ -10,8 +10,6 @@
 
 #include <iostream>
 
-std::string API_KEY = "ccbd29d37e864cd514cd6bb057c7dd8f";
-
 int main()
 {
 
