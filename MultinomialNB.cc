@@ -44,7 +44,7 @@ void MultinomialNB::ReadInTrainingData(std::string file_name) {
 
 void MultinomialNB::ReadInTrainingData() {
     ReadInTrainingData("data.json");
-    }
+}
 
 void MultinomialNB::PrepareData() {
     for(Category &category : m_training_data) {
