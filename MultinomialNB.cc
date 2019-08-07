@@ -43,19 +43,8 @@ void MultinomialNB::ReadInTrainingData(std::string file_name) {
 }
 
 void MultinomialNB::ReadInTrainingData() {
-    std::fstream file("data.json");     // Connection to file
-    Json::Value data_set;               // Recieves contents of file
-    // Transfer file contents to JSON object
-    file >> data_set;
-    // For each data set, add label and sentences to m_training_data
-    for(const auto &label : data_set.getMemberNames()) {
-        std::vector<std::vector<std::string>> clean_data;
-        for(const auto &sentence : data_set[label]) {
-            clean_data.push_back(Split(sentence.toStyledString()));
-        }
-        m_training_data.push_back({label, clean_data});
+    ReadInTrainingData("data.json");
     }
-}
 
 void MultinomialNB::PrepareData() {
     for(Category &category : m_training_data) {
